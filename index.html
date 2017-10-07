@@ -1,23 +1,19 @@
 <html>
 <head>
 <title>dotabap</title>
-<style type="text/css">
-body {
-  font-family: Arial,Helvetica,sans-serif;
-  background: #E8E8E8;
-}
-a, a:visited {
-  color:            #4078c0;
-  text-decoration:  none;
-}
-a:hover, a:active {
-  text-decoration:  underline;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="script.js"></script>
 </head>
-<body>
-<h1>dotabap</h1>
-todo
-<a href="./explore.html">old explore page </a>
+<body onload="run();">
+<h1>dotabap list</h1>
+Sort:
+<a href="#" onclick="sortByName(); return false;">By Name</a>
+<a href="#" onclick="sortByStars(); return false;">By Stars</a>
+<a href="#" onclick="sortByUpdated(); return false;">By Updated</a>
+<a href="#" onclick="sortBySize(); return false;">By Size</a>
+<a href="#" onclick="sortByCreated(); return false;">By Created</a>
+<a href="#" onclick="sortByAuthor(); return false;">By Author</a>
+<br><br>
+<div id="list">spinner</div>
 </body>
 </html>
