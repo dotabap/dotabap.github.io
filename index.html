@@ -69,11 +69,11 @@ function run() {
 
   $.each( data, function( key, val ) {
     items.push( "<h2>" +
-      val.title +
+      key +
       "</h2>&nbsp;<a href='sapevent:install?" +
-      key +
+      val.git_url +
       "'>Clone</a><br><h3>" +
-      key +
+      val.git_url +
       "</h3><br>" +
       val.description );
   });
