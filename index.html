@@ -7,12 +7,14 @@
 <body onload="run();">
 <h1>dotabap list</h1>
 Sort:
-<a href="#" onclick="sortByName(); return false;">By Name</a>
-<a href="#" onclick="sortByStars(); return false;">By Stars</a>
-<a href="#" onclick="sortByUpdated(); return false;">By Updated</a>
-<a href="#" onclick="sortBySize(); return false;">By Size</a>
-<a href="#" onclick="sortByCreated(); return false;">By Created</a>
-<a href="#" onclick="sortByAuthor(); return false;">By Author</a>
+<a href="#" onclick="sortAscending('name'); return false;">By Name</a>
+<a href="#" onclick="sortDescending('stars'); return false;">By Stars</a>
+<a href="#" onclick="sortDescending('pushed_at'); return false;">By Updated</a>
+<a href="#" onclick="sortDescending('lines'); return false;">By Size</a>
+<a href="#" onclick="sortDescending('created_at'); return false;">By Created</a>
+<a href="#" onclick="sortAscending('owner'); return false;">By Author</a>
+<br>
+Search: <input type="text" onkeyup="search(this.value);" autofocus>
 <br><br>
 <div id="list">spinner</div>
 </body>
