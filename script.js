@@ -26,7 +26,7 @@ function search(e) {
     }
   }
 
-// todo, this does not respect current sorting
+  sortDescending("stars");
   render();
 }
 
