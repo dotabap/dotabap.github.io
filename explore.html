@@ -64,18 +64,18 @@ function shuffle(sourceArray) {
 
 function run() {
   /* global $ */
-  $.getJSON( "https://dotabap.github.io/dotabap-list/list.json", function( data ) {
+  $.getJSON( "https://dotabap.github.io/dotabap-generated/generated.json", function( data ) {
   var items = [];
 
   $.each( data, function( key, val ) {
     items.push( "<h2>" +
-      key +
+      data[key].repo.name +
       "</h2>&nbsp;<a href='sapevent:install?" +
-      val.git_url +
+      data[key].repo.clone_url +
       "'>Clone</a><br><h3>" +
-      val.git_url +
+      data[key].repo.clone_url +
       "</h3><br>" +
-      val.description );
+      data[key].repo.description );
   });
 
   shuffle(items);
