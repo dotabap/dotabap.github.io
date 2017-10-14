@@ -76,6 +76,6 @@ function callback(xhttp) {
 function run() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = (() => callback(xhttp));
-  xhttp.open("GET", "https://dotabap.github.io/dotabap-generated/generated.json", true);
+  xhttp.open("GET", "http://generated.dotabap.org/generated.json", true);
   xhttp.send();
 }
