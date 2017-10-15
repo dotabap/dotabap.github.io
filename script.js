@@ -19,7 +19,7 @@ function search(e) {
   repos = [];
   for (let repo of original) {
     if (!repo.description) continue;
-    console.dir(repo.description);
+//    console.dir(repo.description);
     let regex = new RegExp(e, 'i');
     if (repo.description.match(regex)) {
       repos.push(repo);
