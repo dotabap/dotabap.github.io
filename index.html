@@ -11,19 +11,19 @@
 <table>
 <tr><td><img src="./logos/dotabap_logo.svg"></td>
 
-<td>
-Sort:
-<a href="#" onclick="sortAscending('name'); return false;">By Name</a>
-<a href="#" onclick="sortDescending('stars'); return false;">By Stars</a>
-<a href="#" onclick="sortDescending('pushed_at'); return false;">By Updated</a>
-<a href="#" onclick="sortDescending('lines'); return false;">By Size</a>
-<a href="#" onclick="sortDescending('created_at'); return false;">By Created</a>
-<a href="#" onclick="sortAscending('owner'); return false;">By Author</a>
+<td valign="top">
+Sort by:
+<a href="#" onclick="sortAscending('name'); return false;">Name</a>,
+<a href="#" onclick="sortDescending('stars'); return false;">Stars</a>,
+<a href="#" onclick="sortDescending('pushed_at'); return false;">Updated</a>,
+<a href="#" onclick="sortDescending('lines'); return false;">Size</a>,
+<a href="#" onclick="sortDescending('created_at'); return false;">Created</a>,
+<a href="#" onclick="sortAscending('owner'); return false;">Author</a>
 <br>
 Search: <input type="text" onkeyup="search(this.value);" autofocus>
+<br>
+<a href="https://github.com/dotabap/dotabap-list">Add a project</a>
 </td></tr></table>
-
-<hr>
 
 <div id="list"><center>
   <div class="spinner windcatcher" id="windcatcher">
@@ -38,7 +38,6 @@ Search: <input type="text" onkeyup="search(this.value);" autofocus>
   </div>
 </center></div>
 
-<hr>
 <div align="right">
 <img src="https://travis-ci.org/dotabap/dotabap-list.svg?branch=master">
 </div>

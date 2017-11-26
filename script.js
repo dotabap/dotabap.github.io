@@ -21,7 +21,7 @@ function search(e) {
     if (!repo.description) continue;
 //    console.dir(repo.description);
     let regex = new RegExp(e, 'i');
-    if (repo.description.match(regex)) {
+    if (repo.description.match(regex) || repo.owner.match(regex) || repo.name.match(regex)) {
       repos.push(repo);
     }
   }
@@ -74,8 +74,16 @@ function callback(xhttp) {
 }
 
 function run() {
+  let url = "";
+  if(window.location.host.match("c9users.io")) {
+// for testing outside github
+    url = "../dotabap-generated/generated.json";
+  } else {
+    url = "http://generated.dotabap.org/generated.json";
+  }
+
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = (() => callback(xhttp));
-  xhttp.open("GET", "http://generated.dotabap.org/generated.json", true);
+  xhttp.open("GET", url, true);
   xhttp.send();
 }
