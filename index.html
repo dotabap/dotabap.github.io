@@ -1,12 +1,17 @@
 <html>
 <head>
 <title>dotabap</title>
+<link rel="icon" type="image/png" href="./logos/dotabap_square.png">
 <link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="spinner.css">
 <script src="script.js"></script>
 </head>
 <body onload="run();">
-<h1>dotabap list</h1>
-<img src="https://travis-ci.org/dotabap/dotabap-list.svg?branch=master"><br>
+
+<table>
+<tr><td><img src="./logos/dotabap_logo.svg"></td>
+
+<td>
 Sort:
 <a href="#" onclick="sortAscending('name'); return false;">By Name</a>
 <a href="#" onclick="sortDescending('stars'); return false;">By Stars</a>
@@ -16,7 +21,26 @@ Sort:
 <a href="#" onclick="sortAscending('owner'); return false;">By Author</a>
 <br>
 Search: <input type="text" onkeyup="search(this.value);" autofocus>
-<br><br>
-<div id="list">spinner</div>
+</td></tr></table>
+
+<hr>
+
+<div id="list"><center>
+  <div class="spinner windcatcher" id="windcatcher">
+    <div class="blade"></div>
+    <div class="blade"></div>
+    <div class="blade"></div>
+    <div class="blade"></div>
+    <div class="blade"></div>
+    <div class="blade"></div>
+    <div class="blade"></div>
+    <div class="blade"></div>
+  </div>
+</center></div>
+
+<hr>
+<div align="right">
+<img src="https://travis-ci.org/dotabap/dotabap-list.svg?branch=master">
+</div>
 </body>
 </html>
