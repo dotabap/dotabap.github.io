@@ -9,6 +9,10 @@ function sortAscending(field) {
   repos.sort((a, b) => {return a[field] < b[field] ? -1 : a[field] > b[field];});
   render();
 }
+function sortAscendingString(field) {
+  repos.sort((a, b) => {return a[field].toLowerCase() < b[field].toLowerCase() ? -1 : a[field].toLowerCase() > b[field].toLowerCase();});
+  render();
+}
 
 function search(e) {
   if (e === "") {
@@ -32,7 +36,8 @@ function search(e) {
 
 function parse(json) {
   for(let name in json) {
-    repos.push({name,
+    repos.push({
+      name: json[name].repo.name,
       description: json[name].repo.description,
       git_url: json[name].repo.clone_url,
       stars: json[name].repo.stargazers_count,
