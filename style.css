@@ -11,12 +11,12 @@ a:hover, a:active {
   text-decoration:  underline;
 }
 h3 {
-    padding: 0px;
-    margin: 0px;
+  padding: 0px;
+  margin: 0px;
 }
 h4 {
-    padding: 0px;
-    margin: 0px;
+  padding: 0px;
+  margin: 0px;
 }
 .repo{
   padding-bottom: 20px;
@@ -25,4 +25,10 @@ h4 {
   margin: 2px;
   padding: 2px;
   border: 3px solid #CCC;
+}
+.btn {
+    background-color: #333;
+    border: none;
+    color: #CCC;
+    cursor: pointer;
 }

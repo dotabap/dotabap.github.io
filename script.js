@@ -59,7 +59,7 @@ function render() {
       "<h3><a href=" + repo.html_url + ">" + repo.name + "</a></h3>" +
       "<h4>" + repo.description + "</h4>" +
       "<small>" +
-      "Git URL: " + repo.git_url + "<br>" +
+      "Git URL: " + repo.git_url + "<button class=\"btn\" data-clipboard-text=\"" + repo.git_url + "\"><i class=\"fa fa-clipboard\"></i></button><br>" +
       "Owner: <a href=\"" + repo.owner_url + "\">" + repo.owner + "</a><br>" +
       "Lines: " + repo.lines + "<br>" +
       "Stars: " + repo.stars + "<br>" +
@@ -79,6 +79,9 @@ function callback(xhttp) {
 }
 
 function run() {
+  /*global Clipboard*/
+  new Clipboard('.btn');
+
   let url = "";
   if(window.location.host.match("c9users.io")) {
 // for testing outside github
