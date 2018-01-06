@@ -32,3 +32,6 @@ h4 {
     color: #CCC;
     cursor: pointer;
 }
+.inline {
+  display: inline;
+}
