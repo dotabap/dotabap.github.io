@@ -44,6 +44,7 @@ function parse(json) {
       owner: json[name].repo.owner.login,
       owner_url: json[name].repo.owner.html_url,
       lines: json[name].lines,
+      license: json[name].repo.license?json[name].repo.license.name:"null",
       created_at: new Date(json[name].repo.created_at),
       pushed_at: new Date(json[name].repo.pushed_at)
     });
@@ -62,6 +63,7 @@ function render() {
       "Owner: <a href=\"" + repo.owner_url + "\">" + repo.owner + "</a><br>" +
       "Lines: " + repo.lines + "<br>" +
       "Stars: " + repo.stars + "<br>" +
+      "License: " + repo.license + "<br>" +
       "Updated: " + repo.pushed_at.toLocaleDateString() + "<br>" +
       "Created: " + repo.created_at.toLocaleDateString() + "<br>" +
       "</small>" +
