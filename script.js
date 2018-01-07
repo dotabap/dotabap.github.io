@@ -66,7 +66,7 @@ function render() {
       "<h4>" + repo.description + "</h4>" +
       "<small>" +
       "Git URL: " + repo.git_url + "<button class=\"btn\" data-clipboard-text=\"" + repo.git_url + "\"><i class=\"fa fa-clipboard\"></i></button><br>" +
-      "Owner: <a href=\"" + repo.owner_url + "\">" + repo.owner + "</a><br>" +
+      "Author: <a href=\"" + repo.owner_url + "\">" + repo.owner + "</a><br>" +
       "<div class=\"inline\" title=\"Lines of ABAP code\">" + repo.lines + "</div>&nbsp;<i class=\"fa fa-code\"></i>&nbsp;" +
       "<div class=\"inline\" title=\"stars\">" + repo.stars + "</div>&nbsp;<i class=\"fa fa-star\"></i><br>" +
       repo.license + "<br>" +
