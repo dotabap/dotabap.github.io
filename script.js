@@ -39,6 +39,7 @@ function search(e) {
 }
 
 function parse(json) {
+  let total = 0;
   repos = [];
   for(let name in json) {
     repos.push({
@@ -54,7 +55,9 @@ function parse(json) {
       created_at: new Date(json[name].repo.created_at),
       pushed_at: new Date(json[name].repo.pushed_at)
     });
+    total = total + json[name].lines;
   }
+  document.getElementById("totalLOC").innerHTML = total;
   original = repos;
 }
 
