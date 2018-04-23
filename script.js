@@ -73,6 +73,10 @@ function parse(json) {
   original = repos;
 }
 
+function formatDate(date) {
+  return moment(date).format("YYYY/MM/DD");
+}
+
 function render() {
   let html = "";
   for (let i = 0; i < repos.length; ++i) {
@@ -88,11 +92,11 @@ function render() {
           <div class="media-content">
             <div class="content">
               <p>
-                <a href="${repo.html_url}"><strong>${repo.name}</strong></a>
+                <a href="${repo.html_url}"><strong class="huge">${repo.name}</strong></a>
                 <small><em>
                   created by 
                   <a href="${repo.owner_url}">${repo.owner}</a>
-                  <span title="${repo.created_at.toLocaleDateString()}">
+                  <span title="${formatDate(repo.created_at)}">
                     ${moment(repo.created_at).fromNow()}
                   </span>
                 </em></small><br>
@@ -126,7 +130,7 @@ function render() {
               <span class="icon is-small"><i class="fa fa-code"></i></span>&nbsp;${numeral(repo.lines).format("0.[0]a")}
             </div>
             <div class="level-item" title="last updated at">
-              <span class="icon is-small"><i class="fa fa-pencil"></i></span>&nbsp;${repo.pushed_at.toLocaleDateString()}
+              <span class="icon is-small"><i class="fa fa-pencil"></i></span>&nbsp;${formatDate(repo.pushed_at)}
             </div>
           </div>
         </nav>
@@ -135,6 +139,8 @@ function render() {
 
   }
   document.getElementById("list").innerHTML = html;
+  document.getElementById("burger").classList.remove("is-active");
+  document.getElementById("menu").classList.remove("is-active");
 }
 
 function callback(xhttp) {

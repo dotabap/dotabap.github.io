@@ -19,14 +19,23 @@ section.is-hidden, nav.is-hidden, footer.is-hidden {
   margin-top: 0.5em;
 }
 
+strong.huge {
+  font-size: x-large;
+}
+
 .column .box .media-content a:hover {
   color: #98b9ed;
 }
 
 .input.is-header-input {
   border: 0;
+  box-shadow: none;
   background-color: #363636;
   color: #f5f5f5;
+}
+
+.input.is-header-input:focus {
+  box-shadow: none;
 }
 
 input.is-header-input::placeholder  {
