@@ -30,7 +30,7 @@
   </script>
 </head>
 
-<body onload="run();">
+<body onload="onLoad()">
 
 
   <nav id="nav" class="navbar is-dark is-hidden" role="navigation" aria-label="main navigation">
@@ -38,7 +38,19 @@
       <a class="navbar-item" href="http://dotabap.org">
         <img src="./logos/dotabap_logo.svg" alt="logo">
       </a>
-      <div class="navbar-burger burger" id="burger" onclick="toggleMenu()">
+      <div class="navbar-item">
+        <div class="field has-addons is-underlined is-main-search">
+          <div class="control">
+            <input class="input is-header-input" type="text" placeholder="Find a project" id="search" autofocus>
+          </div>
+          <div class="control">
+            <a class="button is-dark">
+              <i class="fa fa-search" id="search-button"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="navbar-burger burger" id="burger">
         <span></span>
         <span></span>
         <span></span>
@@ -47,40 +59,27 @@
 
     <div class="navbar-menu" id="menu">
       <div class="navbar-start">
-        <div class="navbar-item">
-          <div class="field has-addons is-underlined">
-            <div class="control">
-              <input class="input is-header-input" type="text" placeholder="Find a project" id="search" 
-                onkeyup="checkSearchEnterPressed(event)" autofocus>
-            </div>
-            <div class="control">
-              <a class="button is-dark">
-                <i class="fa fa-search" onclick="search(document.getElementById('search').value)"></i>
-              </a>
-            </div>
-          </div>
-        </div>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
             Sort
           </a>
           <div class="navbar-dropdown">
-            <a class="navbar-item" onclick="sortAscendingString('name'); return false;">
+            <a class="navbar-item" id="sort-by-name">
               Name
             </a>
-            <a class="navbar-item" onclick="sortDescending('stars'); return false;">
+            <a class="navbar-item" id="sort-by-stars">
               Stars
             </a>
-            <a class="navbar-item" onclick="sortDescending('pushed_at'); return false;">
+            <a class="navbar-item" id="sort-by-updated">
               Updated
             </a>
-            <a class="navbar-item" onclick="sortDescending('lines'); return false;">
+            <a class="navbar-item" id="sort-by-size">
               Size
             </a>
-            <a class="navbar-item" onclick="sortDescending('created_at'); return false;">
+            <a class="navbar-item" id="sort-by-created">
               Created
             </a>
-            <a class="navbar-item" onclick="sortAscendingString('owner'); return false;">
+            <a class="navbar-item" id="sort-by-author">
               Author
             </a>
           </div>
@@ -211,6 +210,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Shuffle/5.1.2/shuffle.min.js"></script>
 </body>
 
 </html>

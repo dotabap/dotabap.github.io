@@ -20,7 +20,11 @@ section.is-hidden, nav.is-hidden, footer.is-hidden {
 }
 
 strong.huge {
-  font-size: x-large;
+  font-size: x-large;  
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-word;
 }
 
 .column .box .media-content a:hover {
@@ -45,4 +49,10 @@ input.is-header-input::placeholder  {
 
 .is-underlined {
   border-bottom: 1px #f5f5f5 solid;
+}
+
+@media (max-width: 320px) {
+  .field.is-main-search {
+    width: 175px;
+  }
 }
