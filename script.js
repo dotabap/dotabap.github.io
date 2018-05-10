@@ -65,7 +65,7 @@ function onLoad() {
                   <p>
                     <a href="${repo.html_url}"><strong class="huge">${repo.name}</strong></a>
                     <small><em>
-                      created by 
+                      created by
                       <a href="${repo.owner_url}">${repo.owner}</a>
                       <span title="${formatDate(repo.created_at)}">
                         ${moment(repo.created_at).fromNow()}
@@ -165,6 +165,7 @@ function onLoad() {
 
     new Clipboard(".is-clipboard-enabled");
     shuffle = new Shuffle(document.getElementById("list"), { itemSelector: ".column", delimiter: "," });
+    sort("pushed_at", true);
     setTimeout(() => {
       document.getElementById("main").classList.toggle("is-hidden");
       document.getElementById("loading").classList.toggle("is-hidden");
