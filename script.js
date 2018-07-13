@@ -27,8 +27,9 @@ function onLoad() {
   }
 
   function parse(json) {
-    let total = 0;
-    let repos = [];
+    let projects  = 0;
+    let total     = 0;
+    let repos     = [];
     for (let name in json) {
       repos.push({
         name: json[name].repo.name,
@@ -43,12 +44,13 @@ function onLoad() {
         created_at: new Date(json[name].repo.created_at),
         pushed_at: new Date(json[name].repo.pushed_at)
       });
-      total = total + json[name].lines;
+      projects  = projects + 1;
+      total     = total + json[name].lines;
     }
-    return { repos, total };
+    return { repos, projects, total };
   }
 
-  function render({ repos, total }) {
+  function render({ repos, projects, total }) {
     let html = "";
     for (let i = 0; i < repos.length; ++i) {
       let repo = repos[i];
@@ -111,6 +113,8 @@ function onLoad() {
     document.getElementById("list").innerHTML = html;
     document.getElementById("burger").classList.remove("is-active");
     document.getElementById("menu").classList.remove("is-active");
+    document.getElementById("projects").innerHTML = document.getElementById("projects").innerHTML
+      .replace("?", numeral(projects).format("0.[0]a"));
     document.getElementById("totalLOC").innerHTML = document.getElementById("totalLOC").innerHTML
       .replace("?", numeral(total).format("0.[0]a"));
     return repos;
