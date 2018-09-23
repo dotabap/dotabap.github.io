@@ -27,8 +27,6 @@ function onLoad() {
   }
 
   function parse(json) {
-    let projects  = 0;
-    let total     = 0;
     let repos     = [];
     for (let name in json) {
       repos.push({
@@ -45,13 +43,11 @@ function onLoad() {
         created_at: new Date(json[name].repo.created_at),
         pushed_at: new Date(json[name].repo.pushed_at)
       });
-      projects  = projects + 1;
-      total     = total + json[name].lines;
     }
-    return { repos, projects, total };
+    return { repos };
   }
 
-  function render({ repos, projects, total }) {
+  function render({ repos }) {
     let html = "";
     for (let i = 0; i < repos.length; ++i) {
       let repo = repos[i];
@@ -123,10 +119,6 @@ function onLoad() {
     document.getElementById("list").innerHTML = html;
     document.getElementById("burger").classList.remove("is-active");
     document.getElementById("menu").classList.remove("is-active");
-    document.getElementById("projects").innerHTML = document.getElementById("projects").innerHTML
-      .replace("?", numeral(projects).format("0.[0]a"));
-    document.getElementById("totalLOC").innerHTML = document.getElementById("totalLOC").innerHTML
-      .replace("?", numeral(total).format("0.[0]a"));
     return repos;
   }
 
@@ -196,6 +188,19 @@ function onLoad() {
       document.getElementById("sort-by-author").onclick = sort.bind(null, "owner", false);
       shuffle.update();
     }, 500);
+
+    shuffle.on(Shuffle.EventType.LAYOUT, function () {
+      let projects = 0;
+      let total = 0;
+      for (let item of shuffle.items) {
+        if (item.isVisible === true) {
+          projects = projects + 1;
+          total    = total + repos[item.id - 1].lines;
+        }
+      }
+      document.getElementById("loc_count").innerHTML = numeral(total).format("0.[0]a");
+      document.getElementById("project_count").innerHTML = numeral(projects).format("0.[0]a");
+    });
   }
 
   ajax(getUrl())
