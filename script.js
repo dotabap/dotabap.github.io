@@ -117,8 +117,21 @@ function onLoad() {
         </div>`;
     }
     document.getElementById("list").innerHTML = html;
+    document.getElementById("burger").classList.remove("is-active");
     document.getElementById("menu").classList.remove("is-active");
     return repos;
+  }
+
+  function hideMenu() {
+    document.getElementById("burger").classList.remove("is-active");
+    document.getElementById("menu").classList.remove("is-active");
+    return false;
+  }
+
+  function toggleMenu() {
+    document.getElementById("burger").classList.toggle("is-active");
+    document.getElementById("menu").classList.toggle("is-active");
+    return false;
   }
 
   function afterRender(repos) {
@@ -133,6 +146,7 @@ function onLoad() {
           return typeof v === "string" ? v.toLowerCase() : v
         }
       });
+      hideMenu();
       return false;
     }
 
@@ -160,6 +174,7 @@ function onLoad() {
     function filter(attribute) {
       cloud_filter = !cloud_filter;
       search();
+      hideMenu();
       return false;
     }
 
@@ -174,6 +189,7 @@ function onLoad() {
       document.getElementById("nav").classList.toggle("is-hidden");
       document.getElementById("footer").classList.toggle("is-hidden");
       document.getElementById("search").onkeyup = search;
+      document.getElementById("burger").onclick = toggleMenu;
       document.getElementById("search-button").onclick = search;
       document.getElementById("sort-by-name").onclick = sort.bind(null, "name", false);
       document.getElementById("sort-by-stars").onclick = sort.bind(null, "stars", true);
