@@ -117,25 +117,13 @@ function onLoad() {
         </div>`;
     }
     document.getElementById("list").innerHTML = html;
-    document.getElementById("burger").classList.remove("is-active");
     document.getElementById("menu").classList.remove("is-active");
     return repos;
   }
 
-  function hideMenu() {
-    document.getElementById("burger").classList.remove("is-active");
-    document.getElementById("menu").classList.remove("is-active");
-    return false;
-  }
-
-  function toggleMenu() {
-    document.getElementById("burger").classList.toggle("is-active");
-    document.getElementById("menu").classList.toggle("is-active");
-    return false;
-  }
-
   function afterRender(repos) {
     var shuffle = null;
+    let cloud_filter = false;
 
     function sort(attribute, descending) {
       shuffle.sort({
@@ -145,7 +133,6 @@ function onLoad() {
           return typeof v === "string" ? v.toLowerCase() : v
         }
       });
-      hideMenu();
       return false;
     }
 
@@ -153,7 +140,8 @@ function onLoad() {
       let inner = () => {
         let query = document.getElementById("search").value;
         let regex = new RegExp(query, 'i');
-        let predicate = repo => repo.description.match(regex) || repo.owner.match(regex) || repo.name.match(regex);
+        let predicate = repo => (!cloud_filter || repo.cloud === 0) &&
+          ( repo.description.match(regex) || repo.owner.match(regex) || repo.name.match(regex) );
         shuffle.filter(element => predicate(repos[element.getAttribute("data-index")]));
       }
       let timeout = null;
@@ -169,16 +157,23 @@ function onLoad() {
       }
     })();
 
+    function filter(attribute) {
+      cloud_filter = !cloud_filter;
+      search();
+      return false;
+    }
+
     new Clipboard(".is-clipboard-enabled");
     shuffle = new Shuffle(document.getElementById("list"), { itemSelector: ".column", delimiter: "," });
+
     sort("pushed_at", true);
+
     setTimeout(() => {
       document.getElementById("main").classList.toggle("is-hidden");
       document.getElementById("loading").classList.toggle("is-hidden");
       document.getElementById("nav").classList.toggle("is-hidden");
       document.getElementById("footer").classList.toggle("is-hidden");
       document.getElementById("search").onkeyup = search;
-      document.getElementById("burger").onclick = toggleMenu;
       document.getElementById("search-button").onclick = search;
       document.getElementById("sort-by-name").onclick = sort.bind(null, "name", false);
       document.getElementById("sort-by-stars").onclick = sort.bind(null, "stars", true);
@@ -186,6 +181,7 @@ function onLoad() {
       document.getElementById("sort-by-size").onclick = sort.bind(null, "lines", true);
       document.getElementById("sort-by-created").onclick = sort.bind(null, "created_at", true);
       document.getElementById("sort-by-author").onclick = sort.bind(null, "owner", false);
+      document.getElementById("filter-by-cloud").onclick = filter.bind(null, "cloud");
       shuffle.update();
     }, 500);
 
