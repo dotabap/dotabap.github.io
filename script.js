@@ -40,6 +40,7 @@ function onLoad() {
         owner: json[name].repo.owner.login,
         owner_url: json[name].repo.owner.html_url,
         lines: json[name].lines,
+        cloud: json[name].parsing.cloud,
         license: json[name].repo.license ? json[name].repo.license.name : "null",
         created_at: new Date(json[name].repo.created_at),
         pushed_at: new Date(json[name].repo.pushed_at)
@@ -54,6 +55,14 @@ function onLoad() {
     let html = "";
     for (let i = 0; i < repos.length; ++i) {
       let repo = repos[i];
+
+      let cloud = ``;
+      if (repo.cloud === 0) {
+        cloud = `<div class="level-item" title="cloud ready, only syntax, disregarding whitelist">
+                 <span class="icon is-small"><i class="fa fa-cloud"></i></span>&nbsp;
+                 </div>`;
+      }
+
       html += `<div class="column is-half-tablet is-one-third-desktop" data-index="${i}">
           <div class="box">
               <article class="media">
@@ -105,6 +114,7 @@ function onLoad() {
                 <div class="level-item" title="last updated at">
                   <span class="icon is-small"><i class="fa fa-pencil"></i></span>&nbsp;${formatDate(repo.pushed_at)}
                 </div>
+                ${cloud}
               </div>
             </nav>
           </div>
