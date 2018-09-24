@@ -19,6 +19,11 @@
       text-decoration: underline;
     }
 
+    a.disabled {
+      text-decoration: none;
+      color: inherit;
+    }
+    
     div#header {
       display: block;
       margin-top: 0.5em;
@@ -94,14 +99,30 @@
         $('#content').html(items.join("<br><br>"));
 
       });
+
+      if (!check4ArrowFunctions()){
+        //dotabap.org needs full ES6 support
+        $("#poweredby").removeAttr('href').addClass("disabled");
+      }
+
     }
+	
+    function check4ArrowFunctions() {
+      try {   
+        eval("var arrowFunction = (x) => x"); 
+      }
+      catch (e) {
+        return false; 
+      }
+		  return true;
+	  }
   </script>
 </head>
 
 <body onload="run()">
   <div id="header">
     <h1>Explore</h1>&nbsp;Powered by
-    <a href="http://dotabap.org">dotabap.org</a>
+    <a href="http://dotabap.org" id="poweredby">dotabap.org</a>
   </div>
   <div id="toc">
     <div id="content"></div>
