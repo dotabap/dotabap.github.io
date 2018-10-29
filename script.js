@@ -9,7 +9,7 @@ function onLoad() {
       // for testing outside github
       return "../dotabap-generated/generated.json";
     } else {
-      return "https://generated.dotabap.org/generated.json";
+      return "http://generated.dotabap.org/generated.json";
     }
   }
 
