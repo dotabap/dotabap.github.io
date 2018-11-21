@@ -1,25 +1,156 @@
-/*global Clipboard, moment, numeral, Shuffle*/
+/*global Clipboard, moment, numeral, Shuffle, Chart*/
+
 function onLoad() {
+
+////////////////////////////
+// stats modal handling
+
+  var modal = document.getElementById('statsModal');
+  var span = document.getElementsByClassName("close")[0];
+
+  function renderStats(data, owner, name) {
+    console.dir(data);
+
+    let html = `
+    <a href="https://github.com/larshp/abaplint"><img src="./logos/abaplint.svg" height='50px' width='50px'></a>
+    <b>${owner}/${name}</b><br>
+    <table><tr><td width="50%">
+    <table>
+    <tr><td>Objects:</td><td style="text-align:right">${data.totals.objects}</td></tr>
+    <tr><td>Files:</td><td style="text-align:right">${data.totals.files}</td></tr>
+    <tr><td>Statements:</td><td style="text-align:right">${data.totals.statements}</td></tr>
+    <tr><td>Tokens:</td><td style="text-align:right">${data.totals.tokens}</td></tr>
+    <tr><td>Target:</td><td style="text-align:right">${data.target}</td></tr>
+    </table>
+    </td><td>
+    <canvas id="statsObjects" width="300" height="200"></canvas>
+    </td></tr></table>
+    <canvas id="statsStatements" width="500" height="300"></canvas>
+    `;
+
+    if (data.issues.length > 0) {
+      html = html + `<br><b>Issues</b><br><table>`;
+      for (const issue of data.issues) {
+        html = html + `<tr><td>${issue.type}</td><td style="text-align:right">${issue.count}</td></tr>`;
+      }
+      html = html + `</table>`;
+    }
+
+    html = html + `<br><small>abaplint ${data.version}, ${data.time}</small>`;
+
+    document.getElementById("stats-modal").innerHTML = html;
+
+    renderStatsObjects(data);
+    renderStatsStatements(data);
+  }
+
+  function renderStatsStatements(data) {
+    let green = "#3cba9f";
+    let red = "#c45850";
+    let points = [];
+    let labels = [];
+    let colors = [];
+
+    for (const object of data.statements) {
+      labels.push(object.type);
+      points.push(object.count);
+      if (object.count === data.totals.statements) {
+        colors.push(green);
+      } else {
+        colors.push(red);
+      }
+    }
+
+    var data = data = {
+      datasets: [{data: points,
+        backgroundColor: colors,
+      }],
+      labels: labels};
+
+    var ctx = document.getElementById("statsStatements").getContext('2d');
+
+    var myChart = new Chart(ctx, {
+      type: 'horizontalBar',
+      data,
+      options: {legend: {display: false}}
+    });
+  }
+
+  function renderStatsObjects(data) {
+    let points = [];
+    let labels = [];
+
+    for (const object of data.objects) {
+      labels.push(object.type);
+      points.push(object.count);
+    }
+
+    var data = data = {
+      datasets: [{data: points,
+        backgroundColor: ["#f4a460","#ee7942","#cd6839", "#a0522d", "#8b4513"],
+      }],
+      labels: labels};
+
+    var ctx = document.getElementById("statsObjects").getContext('2d');
+
+    var myChart = new Chart(ctx, {
+      type: 'pie',
+      data,
+      options: {legend: {position: "right"}}
+    });
+  }
+
+  function catchStats(d) {
+    document.getElementById("stats-modal").innerHTML = 'Error loading, try again later';
+  }
+
+  window.stats = function (owner, name) {
+    document.getElementById("stats-modal").innerHTML = 'Loading';
+    modal.style.display = "block";
+    const url = getUrl("stats/" + owner + "_" + name + ".json");
+    ajax(url).then((d) => renderStats(d, owner, name)).catch(catchStats);
+  }
+
+  span.onclick = function() {
+  // When the user clicks on <span> (x), close the modal
+    modal.style.display = "none";
+  }
+
+  window.onclick = function(event) {
+  // When the user clicks anywhere outside of the modal, close it
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+  }
+
+/////////////////////////
+// other logic
+
   function formatDate(date) {
     return moment(date).format("YYYY/MM/DD");
   }
 
-  function getUrl() {
+  function getUrl(file = "generated.json") {
     if (window.location.host.match("c9users.io")) {
       // for testing outside github
-      return "../dotabap-generated/generated.json";
+      return "../dotabap-generated/" + file;
     } else {
-      return "https://generated.dotabap.org/generated.json";
+      return "https://generated.dotabap.org/" + file;
     }
   }
 
   function ajax(url) {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       let xhttp = new XMLHttpRequest();
       xhttp.onreadystatechange = () => {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
           resolve(JSON.parse(xhttp.responseText));
+        } else if (xhttp.readyState == 4) {
+          reject({status: this.status, statusText: xhttp.statusText });
         }
+      };
+      xhttp.onerror = function () {
+        reject({ status: this.status, statusText: xhttp.statusText });
       };
       xhttp.open("GET", url, true);
       xhttp.send();
@@ -27,7 +158,7 @@ function onLoad() {
   }
 
   function parse(json) {
-    let repos     = [];
+    let repos = [];
     for (let name in json) {
       repos.push({
         name: json[name].repo.name,
@@ -111,6 +242,9 @@ function onLoad() {
                   <span class="icon is-small"><i class="fa fa-pencil"></i></span>&nbsp;${formatDate(repo.pushed_at)}
                 </div>
                 ${cloud}
+                <div class="level-item" title="stats">
+                  <span class="icon is-small"><img onclick="javascript:stats('${repo.owner}','${repo.name}');" src="./logos/abaplint.svg"></span>
+                </div>
               </div>
             </nav>
           </div>
@@ -218,5 +352,6 @@ function onLoad() {
   ajax(getUrl())
     .then(parse)
     .then(render)
-    .then(afterRender);
+    .then(afterRender)
+    .catch(() => { console.log("Error loading"); });
 }
