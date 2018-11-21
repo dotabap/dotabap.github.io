@@ -25,6 +25,7 @@ function onLoad() {
     </td><td>
     <canvas id="statsObjects" width="300" height="200"></canvas>
     </td></tr></table>
+    <b>Statement Compatibility</b><br>
     <canvas id="statsStatements" width="500" height="300"></canvas>
     `;
 
