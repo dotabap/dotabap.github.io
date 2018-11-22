@@ -6,7 +6,6 @@ function onLoad() {
 // stats modal handling
 
   var modal = document.getElementById('statsModal');
-  var span = document.getElementsByClassName("close")[0];
 
   function renderStats(data, owner, name) {
     console.dir(data);
@@ -107,22 +106,26 @@ function onLoad() {
 
   window.stats = function (owner, name) {
     document.getElementById("stats-modal").innerHTML = 'Loading';
-    modal.style.display = "block";
+
+    modal.classList.add('is-active');
+
     const url = getUrl("stats/" + owner + "_" + name + ".json");
     ajax(url).then((d) => renderStats(d, owner, name)).catch(catchStats);
   }
 
-  span.onclick = function() {
-  // When the user clicks on <span> (x), close the modal
-    modal.style.display = "none";
+  document.getElementsByClassName("modal-close")[0].onclick = function() {
+    modal.classList.remove('is-active');
   }
 
-  window.onclick = function(event) {
-  // When the user clicks anywhere outside of the modal, close it
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
+  document.getElementsByClassName("modal-background")[0].onclick = function() {
+    modal.classList.remove('is-active');
   }
+
+  document.onkeydown = function (event) {
+    if (event.keyCode === 27) { // escape
+      modal.classList.remove('is-active');
+    }
+  };
 
 /////////////////////////
 // other logic
