@@ -24,14 +24,22 @@ function onLoad() {
     </td><td>
     <canvas id="statsObjects" width="300" height="200"></canvas>
     </td></tr></table>
+    <br>
     <b>Statement Compatibility</b><br>
     <canvas id="statsStatements" width="500" height="300"></canvas>
+    <br>
+    <b>Object Orientation</b><br>
+    <canvas id="statsObjectOrientation" width="500" height="200"></canvas>
+    <br>
+    <b>Method Length(Statements)</b><br>
+    <canvas id="statsMethodLength" width="400" height="200"></canvas>
+    <br>
     `;
 
     if (data.issues.length > 0) {
-      html = html + `<br><b>Issues</b><br><table>`;
+      html = html + `<b>Issues</b><br><table>`;
       for (const issue of data.issues) {
-        html = html + `<tr><td>${issue.type}</td><td style="text-align:right">${issue.count}</td></tr>`;
+        html = html + `<tr><td>${issue.type}:&nbsp;</td><td style="text-align:right">${issue.count}</td></tr>`;
       }
       html = html + `</table>`;
     }
@@ -41,7 +49,65 @@ function onLoad() {
     document.getElementById("stats-modal").innerHTML = html;
 
     renderStatsObjects(data);
+    renderStatsObjectOrientation(data);
+    renderStatsMethodLength(data);
     renderStatsStatements(data);
+  }
+
+  function renderStatsObjectOrientation(data) {
+    let green = "#3cba9f";
+    let red = "#c45850";
+
+    if (data.objectOrientation === undefined) {
+      return;
+    }
+
+    var data = {
+      datasets: [{data: [data.objectOrientation.oo, data.objectOrientation.non],
+        backgroundColor: [green, red],
+      }],
+      labels: ["OO", "non OO"]};
+
+    var ctx = document.getElementById("statsObjectOrientation").getContext('2d');
+
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data,
+      options: {legend: {display: false}
+      }
+    });
+  }
+
+  function renderStatsMethodLength(data) {
+    let green = "#3cba9f";
+    let red = "#c45850";
+    let points = [];
+    let labels = [];
+    let colors = [];
+
+    if (data.methodLength === undefined) {
+      return;
+    }
+
+    for (let i = 0; i < data.methodLength.length ; i++) {
+      labels.push(i);
+      points.push(data.methodLength[i]);
+      colors.push(green);
+    }
+
+    var data = {
+      datasets: [{data: points,
+        backgroundColor: colors,
+      }],
+      labels: labels};
+
+    var ctx = document.getElementById("statsMethodLength").getContext('2d');
+
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data,
+      options: {legend: {display: false}}
+    });
   }
 
   function renderStatsStatements(data) {
@@ -61,7 +127,7 @@ function onLoad() {
       }
     }
 
-    var data = data = {
+    var data = {
       datasets: [{data: points,
         backgroundColor: colors,
       }],
@@ -85,7 +151,7 @@ function onLoad() {
       points.push(object.count);
     }
 
-    var data = data = {
+    var data = {
       datasets: [{data: points,
         backgroundColor: ["#f4a460","#ee7942","#cd6839", "#a0522d", "#8b4513"],
       }],
