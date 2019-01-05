@@ -375,6 +375,12 @@ function onLoad() {
       }
     })();
 
+    function rightClick() {
+      document.getElementById("search").value = "";
+      window.event.returnValue = false;
+      search();
+    }
+
     function filter(attribute) {
       cloud_filter = !cloud_filter;
       search();
@@ -393,6 +399,7 @@ function onLoad() {
       document.getElementById("nav").classList.toggle("is-hidden");
       document.getElementById("footer").classList.toggle("is-hidden");
       document.getElementById("search").onkeyup = search;
+      document.getElementById("search").oncontextmenu = rightClick;
       document.getElementById("burger").onclick = toggleMenu;
       document.getElementById("search-button").onclick = search;
       document.getElementById("sort-by-name").onclick = sort.bind(null, "name", false);
