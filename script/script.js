@@ -437,5 +437,5 @@ function onLoad() {
     .then(parse)
     .then(render)
     .then(afterRender)
-    .catch(() => { console.log("Error loading"); });
+    .catch((e) => { console.log("Error loading"); console.dir(e); });
 }
