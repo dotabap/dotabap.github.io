@@ -1,10 +1,11 @@
 import {Start} from "./pages/start.js";
+import {onLoad} from "./script.js";
 
 export class Router {
   run() {
-    new Start().render();
+    Start.render();
 
-    onLoad(); // from script.js
+    onLoad();
   }
 }
 

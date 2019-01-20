@@ -1,5 +1,5 @@
 export class Start {
-  render() {
+  static render() {
     document.getElementById("main").innerHTML = `
     <div class="container">
       <div class="level">
