@@ -24,3 +24,10 @@ export function ajax(url) {
       xhttp.send();
     });
   }
+
+export function hideLoading() {
+      document.getElementById("main").classList.toggle("is-hidden");
+      document.getElementById("loading").classList.toggle("is-hidden");
+      document.getElementById("nav").classList.toggle("is-hidden");
+      document.getElementById("footer").classList.toggle("is-hidden");
+}

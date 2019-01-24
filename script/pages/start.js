@@ -1,7 +1,7 @@
 /*global Clipboard, moment, numeral, Shuffle, Chart*/
 
 import {StatsModal} from "../modal.js";
-import {getUrl, ajax} from "../utils.js";
+import {getUrl, ajax, hideLoading} from "../utils.js";
 
 // todo, most of this to be moved to start.js class
 
@@ -106,6 +106,7 @@ function onLoad() {
                 ${cloud}
                 <div class="level-item" title="stats">
                   <span class="icon is-small"><img onclick="javascript:stats('${repo.owner}','${repo.name}');" src="./logos/abaplint.svg"></span>
+                  <a href="./#/-/${repo.owner}/${repo.name}"><span class="icon is-small"><img src="./logos/abaplint.svg"></span></a>
                 </div>
               </div>
             </nav>
@@ -186,10 +187,13 @@ function onLoad() {
     sort("pushed_at", true);
 
     setTimeout(() => {
+      hideLoading();
+      /*
       document.getElementById("main").classList.toggle("is-hidden");
       document.getElementById("loading").classList.toggle("is-hidden");
       document.getElementById("nav").classList.toggle("is-hidden");
       document.getElementById("footer").classList.toggle("is-hidden");
+      */
       document.getElementById("search").onkeyup = search;
       document.getElementById("search").oncontextmenu = rightClick;
       document.getElementById("burger").onclick = toggleMenu;
