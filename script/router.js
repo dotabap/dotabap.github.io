@@ -1,11 +1,8 @@
 import {Start} from "./pages/start.js";
-import {onLoad} from "./script.js";
 
 export class Router {
   run() {
     Start.render();
-
-    onLoad();
   }
 }
 
