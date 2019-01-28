@@ -26,8 +26,8 @@ export function ajax(url) {
   }
 
 export function hideLoading() {
-      document.getElementById("main").classList.toggle("is-hidden");
-      document.getElementById("loading").classList.toggle("is-hidden");
-      document.getElementById("nav").classList.toggle("is-hidden");
-      document.getElementById("footer").classList.toggle("is-hidden");
+  document.getElementById("main").classList.toggle("is-hidden", false);
+  document.getElementById("loading").classList.toggle("is-hidden", true);
+  document.getElementById("nav").classList.toggle("is-hidden", false);
+  document.getElementById("footer").classList.toggle("is-hidden", false);
 }

@@ -188,12 +188,6 @@ function onLoad() {
 
     setTimeout(() => {
       hideLoading();
-      /*
-      document.getElementById("main").classList.toggle("is-hidden");
-      document.getElementById("loading").classList.toggle("is-hidden");
-      document.getElementById("nav").classList.toggle("is-hidden");
-      document.getElementById("footer").classList.toggle("is-hidden");
-      */
       document.getElementById("search").onkeyup = search;
       document.getElementById("search").oncontextmenu = rightClick;
       document.getElementById("burger").onclick = toggleMenu;
@@ -214,7 +208,7 @@ function onLoad() {
       for (let item of shuffle.items) {
         if (item.isVisible === true) {
           projects = projects + 1;
-          total    = total + repos[item.id - 1].lines;
+          total    = total + repos[item.element.dataset.index].lines;
         }
       }
       document.getElementById("loc_count").innerHTML = numeral(total).format("0.[0]a");
