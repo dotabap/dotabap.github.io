@@ -1,16 +1,10 @@
-/*global Clipboard, moment, numeral, Shuffle, Chart*/
+/*global Clipboard, moment, numeral, Shuffle*/
 
-import {StatsModal} from "../modal.js";
 import {getUrl, ajax, hideLoading} from "../utils.js";
 
 // todo, most of this to be moved to start.js class
 
 function onLoad() {
-
-////////////////////////////
-// stats modal handling
-
-  StatsModal.init();
 
 /////////////////////////
 // other logic
@@ -105,7 +99,6 @@ function onLoad() {
                 </div>
                 ${cloud}
                 <div class="level-item" title="stats">
-                  <span class="icon is-small"><img onclick="javascript:stats('${repo.owner}','${repo.name}');" src="./logos/abaplint.svg"></span>
                   <a href="./#/-/${repo.owner}/${repo.name}"><span class="icon is-small"><img src="./logos/abaplint.svg"></span></a>
                 </div>
               </div>
@@ -203,6 +196,10 @@ function onLoad() {
     }, 500);
 
     shuffle.on(Shuffle.EventType.LAYOUT, function () {
+// todo, how to deregister when page is changed?
+      if (document.getElementById("loc_count") === null) {
+        return;
+      }
       let projects = 0;
       let total = 0;
       for (let item of shuffle.items) {
