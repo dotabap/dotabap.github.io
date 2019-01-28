@@ -15,17 +15,17 @@ import {hideLoading, getUrl, ajax} from "../utils.js";
     <tr><td>Target:</td><td style="text-align:right">${data.target}</td></tr>
     </table>
     </td><td>
-    <canvas id="statsObjects" width="300" height="200"></canvas>
+    <canvas id="statsObjects" width="350" height="250"></canvas>
     </td></tr></table>
     <br>
     <b>Statement Compatibility</b><br>
-    <canvas id="statsStatements" width="500" height="300"></canvas>
+    <canvas id="statsStatements" width="400" height="100"></canvas>
     <br>
     <b>Object Orientation</b><br>
-    <canvas id="statsObjectOrientation" width="500" height="200"></canvas>
+    <canvas id="statsObjectOrientation" width="500" height="100"></canvas>
     <br>
     <b>Method Length(Statements)</b><br>
-    <canvas id="statsMethodLength" width="400" height="200"></canvas>
+    <canvas id="statsMethodLength" width="400" height="100"></canvas>
     <br>
     `;
 
