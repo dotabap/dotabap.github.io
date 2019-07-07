@@ -99,7 +99,7 @@ function onLoad() {
                 </div>
                 ${cloud}
                 <div class="level-item" title="stats">
-                  <a href="./#/-/${repo.owner}/${repo.name}"><span class="icon is-small"><img src="./logos/abaplint.svg"></span></a>
+                  <a href="https://stats.abaplint.org/#/-/${repo.owner}/${repo.name}"><span class="icon is-small"><img src="./logos/abaplint.svg"></span></a>
                 </div>
               </div>
             </nav>
