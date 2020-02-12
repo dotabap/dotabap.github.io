@@ -18,7 +18,7 @@ function onLoad() {
     for (let name in json) {
       repos.push({
         name: json[name].repo.name,
-        description: json[name].repo.description,
+        description: json[name].repo.description ? json[name].repo.description : "",
         git_url: json[name].repo.clone_url,
         stars: json[name].repo.stargazers_count,
         html_url: json[name].repo.html_url,
