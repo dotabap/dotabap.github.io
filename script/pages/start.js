@@ -244,8 +244,8 @@ export class Start {
           </h2>
         </div>
         <div class="level-right">
-          <a href="https://travis-ci.org/dotabap/dotabap-list">
-            <img src="https://travis-ci.org/dotabap/dotabap-list.svg?branch=master" alt="build status"  class="has-tiny-top-margin">
+          <a href="https://github.com/dotabap/dotabap-list/actions">
+            <img src="https://github.com/dotabap/dotabap-list/workflows/Cron/badge.svg" alt="build status"  class="has-tiny-top-margin">
           </a>
         </div>
       </div>
