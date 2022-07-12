@@ -326,9 +326,9 @@ export class Start {
               <span class="icon">
                 <i class="fa fa-plus"></i>
               </span>
-              <span>
-                Add Project
-              </span>
+                <span>
+                  Add Project
+                </span>
             </a>
           </p>
         </div>
@@ -340,6 +340,16 @@ export class Start {
               </span>
               <span>
                 Fork Me
+              </span>
+            </a>
+          </p>
+        </div>
+        <div class="navbar-item">
+          <p class="control">
+            <a class="button is-dark" href="https://bestofui5.org/">
+              <img src="./logos/bestofui5.svg" alt="logo">
+              <span>
+                BestOfUI5
               </span>
             </a>
           </p>
