@@ -344,6 +344,16 @@ export class Start {
             </a>
           </p>
         </div>
+        <div class="navbar-item">
+          <p class="control">
+            <a class="button is-dark" style="padding-right: 1.25em;" href="https://bestofui5.org/">
+              <img src="./logos/bestofui5.svg" alt="logo">
+              <span>
+                BestOfUI5
+              </span>
+            </a>
+          </p>
+        </div>
       </div>
     </div>
     `;
